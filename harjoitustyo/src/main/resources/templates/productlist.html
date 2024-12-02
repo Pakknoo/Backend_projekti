@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<head>
+<title>Productlist</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+    <h1>Products</h1>
+
+</div>
+<div class="col-md-4">
+    <h3>Hello <span sec:authentication="name"></span></h3>
+</div>
+<div class="col-md-4" style="padding:20px 0">
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out" class="btn btn-sm btn-secondary" />
+    </form>
+</div>
+
+   
+    <table class="table table-striped">
+
+        <tr>
+            <th>Product name</th>
+            <th>Price</th>
+            <th>Category name</th>
+            <th>Manufacturer</th>
+            <th sec:authorize="hasAuthority('ADMIN')"> </th>
+        </tr> 
+    
+        <body>
+            <tr th:each=" product: ${products}">
+                <td th:text="${product.productName}"></td>
+                <td th:text="${product.price} + €"></td>
+                <td th:text="${product.category.categoryName}"></td>
+                <td th:text="${product.manufacturer.manufacturerName}"></td>
+                <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${product.productId})}" class="btn btn-primary">Delete</a></td>
+                
+                <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editproduct/{id}(id=${product.productId})}" class="btn btn-primary">Edit</a></td>
+                
+            </tr>  
+        </body>
+    </table>
+    <a href="/addproduct" class="btn btn-primary">Add product</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/addmanufacturer" class="btn btn-primary" >Add manufacturer</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/addcategory" class="btn btn-primary" >Add category</a>
+
+</body>
+</html>

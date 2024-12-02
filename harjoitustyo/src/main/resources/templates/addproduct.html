@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <div>
+        <form th:object="${product}" th:action="@{saveproduct}" action="#" method="post">
+            <label for="productName">Product name</label>
+            <input type="text" id="productName" th:field="*{productName}" />
+            <td th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}">Error</td>
+            <label for="price">Price</label>
+            <input type="text" id="price" th:field="*{price}"  />
+            <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Error</td>
+
+            <label for="category">Category</label>
+            <select id="category" th:field="*{category}"  >  
+                <option th:each="category: ${categories}" th:value="${category.categoryId}" th:text="${category.categoryName}">
+                </option>
+            </select>
+
+            <label for="manufacturer">Manufacturer</label>
+            <select id="manufacturer" th:field="*{manufacturer}"  >
+                <option th:each="manufacturer: ${manufacturers}" th:value="${manufacturer.manufacturerId}" th:text="${manufacturer.manufacturerName}">
+                </option>
+            </select>
+
+            <input type="submit" value="Save" class="btn btn-primary"></input>
+        </form>
+    </div>
+</body>
+
+</html>

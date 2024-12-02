@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Products</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Edit product</h1>
+    <div>
+        <form th:object="${product}" th:action="@{/saveproduct}" action="#" method="post">
+        <input type="hidden" id="id" th:field="*{productId}" />
+        <label for="name">Product name</label>
+        <input type="text" id="productName" th:field="*{productName}" />
+        <label for="price">Price</label>
+        <input type="text" id="price" th:field="*{price}" />
+
+        <label for="category">Category</label>
+        <select id="category" th:field="*{category}" class="form-control"> 
+            <option th:each="category: ${categories}" th:value="${category.categoryId}" th:text="${category.categoryName}">
+            </option>
+        </select>
+        <div th:if="${#fields.hasErrors('category')}" class="error">
+            <span th:errors="*{category}"></span>
+        </div>
+
+        <label for="manufacturer">Manufacturer</label>
+        <select id="manufacturer" th:field="*{manufacturer}" class="form-control" >   
+            <option th:each="manufacturer: ${manufacturers}" th:value="${manufacturer.manufacturerId}" th:text="${manufacturer.manufacturerName}">
+            </option>
+        </select>
+
+        <div th:if="${#fields.hasErrors('manufacturer')}" class="error">
+            <span th:errors="*{manufacturer}"></span>
+        </div>
+
+        <input type="submit" value="Save" class="btn btn-primary" ></input>
+        </form>
+        </div>
+</body>

@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <div>
+        <form th:object="${manufacturer}" th:action="@{savemanufacturer}" action="#" method="post">
+            <label for="manufacturerName">Name</label>
+            <input type="text" id="manufacturerName" th:field="*{manufacturerName}" />
+            <td th:if="${#fields.hasErrors('manufacturerName')}" th:errors="*{manufacturerName}">Error</td>
+            <input type="submit" value="Lisää valmistaja" class="btn btn-primary"></input>
+        </form>
+    </div>
+</body>
+
+</html>
