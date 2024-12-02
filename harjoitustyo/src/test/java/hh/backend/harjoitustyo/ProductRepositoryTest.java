@@ -46,7 +46,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void testFindBookById() {
+    public void FindProductById() {
         Category category = new Category("Turvakaukalo");
         cRepository.save(category);
 
